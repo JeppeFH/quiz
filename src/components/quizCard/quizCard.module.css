@@ -1,0 +1,71 @@
+.QuizForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.QuizForm img {
+  width: 100%;
+  background-size: cover;
+  margin: 20px 0 40px 0;
+}
+
+.QuizForm h2 {
+  margin-bottom: 30px;
+  font-size: 18px;
+}
+
+.optionBtn {
+  display: flex;
+  padding: 6px;
+  border-radius: 30px;
+  border: none;
+  font-size: 16px;
+  background-color: rgb(243, 243, 243);
+  color: black;
+  box-shadow: 0px 4px #d88444;
+  font-weight: bolder;
+  cursor: pointer;
+  margin-bottom: 30px;
+  gap: 20px;
+  align-items: center;
+}
+
+.optionBtn:hover {
+  background-color: rgb(234, 234, 234);
+  transition: all 150ms ease-in-out;
+}
+
+.optionLabel {
+  background-color: #d88444;
+  color: white;
+  display: flex;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  align-items: center;
+}
+
+.timer {
+  margin-bottom: 30px;
+}
+
+.timer p,
+.counter {
+  color: white;
+  font-size: 16px;
+}
+
+/* Quiz farver ved forkert og korrekt */
+.correct {
+  background-color: #4caf50 !important;
+  box-shadow: 0px 4px #4caf50 !important;
+  color: white;
+}
+
+.wrong {
+  background-color: #f44336 !important;
+  box-shadow: 0px 4px #f44336 !important;
+  color: white;
+}
