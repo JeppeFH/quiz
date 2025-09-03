@@ -41,8 +41,8 @@ export const useFetchQuiz = () => {
 
   return {
     quiz,
-    quizError,
-    quizIsLoading,
+    error: quizError,
+    isLoading: quizIsLoading,
     fetchQuiz,
     fetchQuizById,
   };

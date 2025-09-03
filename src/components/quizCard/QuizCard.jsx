@@ -6,77 +6,79 @@ const QuizCard = ({ quiz, onNext }) => {
   const [isCorrect, setIsCorrect] = useState(null);
   const [counter, setCounter] = useState(8);
 
-  /* Håndterer svar */
+  // Håndterer svar
   const handleAnswer = (optionId) => {
     setSelectedOption(optionId);
-    if (optionId === quiz.correctOptionId) {
-      setIsCorrect(true);
-    } else {
-      setIsCorrect(false);
-    }
+    setIsCorrect(optionId === quiz.correctOptionId);
   };
 
-  /* Timer-counter */
+  // Timer-counter når et svar er valgt
   useEffect(() => {
-    if (selectedOption) {
-      const timer = setInterval(() => {
-        setCounter((prev) => {
-          if (prev === 1) {
-            clearInterval(timer);
-            onNext(); // Går til næste spørgsmål
-          }
-          return prev - 1;
-        });
-      }, 1000);
-      return () => clearInterval(timer);
-    }
-  }, [selectedOption]);
+    if (!selectedOption) return;
+
+    const timer = setInterval(() => {
+      setCounter((prev) => {
+        if (prev === 1) {
+          clearInterval(timer);
+          onNext(); // Går til næste spørgsmål
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [selectedOption, onNext]);
+
+  // Nulstil state ved nyt spørgsmål
+  useEffect(() => {
+    setCounter(8);
+    setSelectedOption(null);
+    setIsCorrect(null);
+  }, [quiz]);
 
   return (
-    <>
-      <form className={styles.QuizForm}>
-        {<img src="/quiz.jpg" alt="Picture of quiz" />}
+    <form className={styles.QuizForm}>
+      <img src="/quiz.jpg" alt="Picture of school" />
 
-        {selectedOption ? (
-          <div className={styles.timer}>
-            <p>Næste spørgsmål begynder om</p>
-            <label className={styles.counter}>{counter}</label>
-          </div>
-        ) : (
-          <h2>{quiz.question}</h2>
-        )}
+      {selectedOption ? (
+        <div className={styles.timer}>
+          <p>Næste spørgsmål begynder om</p>
+          <label className={styles.counter}>{counter}</label>
+        </div>
+      ) : (
+        <h2>{quiz.question}</h2>
+      )}
 
-        {quiz.options.map((option, index) => {
-          const isSelected = selectedOption === option._id;
-          const isRightAnswer = option._id === quiz.correctOptionId;
+      {quiz.options.map((option, index) => {
+        const isSelected = selectedOption === option._id;
+        const isRightAnswer = option._id === quiz.correctOptionId;
 
-          let btnStyle = styles.optionBtn;
-          if (selectedOption) {
-            if (isSelected && isCorrect)
-              btnStyle = `${styles.optionBtn} ${styles.correct}`;
-            if (isSelected && !isCorrect)
-              btnStyle = `${styles.optionBtn} ${styles.wrong}`;
-            if (!isSelected && isRightAnswer)
-              btnStyle = `${styles.optionBtn} ${styles.correct}`;
-          }
+        let btnStyle = styles.optionBtn;
+        if (selectedOption) {
+          if (isSelected && isCorrect)
+            btnStyle = `${styles.optionBtn} ${styles.correct}`;
+          if (isSelected && !isCorrect)
+            btnStyle = `${styles.optionBtn} ${styles.wrong}`;
+          if (!isSelected && isRightAnswer)
+            btnStyle = `${styles.optionBtn} ${styles.correct}`;
+        }
 
-          return (
-            <button
-              key={option._id}
-              type="button"
-              className={btnStyle}
-              onClick={() => handleAnswer(option._id)}
-              disabled={!!selectedOption}
-            >
-              <label className={styles.optionLabel}>
-                {String.fromCharCode(65 + index)}
-              </label>
-              <p>{option.text}</p>
-            </button>
-          );
-        })}
-      </form>
-    </>
+        return (
+          <button
+            key={option._id}
+            type="button"
+            className={btnStyle}
+            onClick={() => handleAnswer(option._id)}
+            disabled={!!selectedOption}
+          >
+            <label className={styles.optionLabel}>
+              {String.fromCharCode(65 + index)}
+            </label>
+            <p>{option.text}</p>
+          </button>
+        );
+      })}
+    </form>
   );
 };
 
