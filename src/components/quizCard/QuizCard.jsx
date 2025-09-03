@@ -12,28 +12,32 @@ const QuizCard = ({ quiz, onNext }) => {
     setIsCorrect(optionId === quiz.correctOptionId);
   };
 
-  // Timer-counter når et svar er valgt
+  // Timer + automatisk næste spørgsmål
   useEffect(() => {
     if (!selectedOption) return;
 
-    const timer = setInterval(() => {
-      setCounter((prev) => {
-        if (prev === 1) {
-          clearInterval(timer);
-          onNext(); // Går til næste spørgsmål
-        }
-        return prev - 1;
-      });
+    let timeLeft = 8;
+    setCounter(timeLeft);
+
+    const interval = setInterval(() => {
+      timeLeft -= 1;
+      setCounter(timeLeft);
+
+      if (timeLeft <= 0) {
+        clearInterval(interval);
+        onNext(); // Går til næste spørgsmål
+      }
     }, 1000);
 
-    return () => clearInterval(timer);
+    // Cleanup ved unmount / nyt spørgsmål
+    return () => clearInterval(interval);
   }, [selectedOption, onNext]);
 
   // Nulstil state ved nyt spørgsmål
   useEffect(() => {
-    setCounter(8);
     setSelectedOption(null);
     setIsCorrect(null);
+    setCounter(8);
   }, [quiz]);
 
   return (

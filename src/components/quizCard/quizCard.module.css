@@ -59,13 +59,19 @@
 
 /* Quiz farver ved forkert og korrekt */
 .correct {
-  background-color: #4caf50 !important;
   box-shadow: 0px 4px #4caf50 !important;
-  color: white;
+  color: #4caf50;
+}
+
+.correct .optionLabel {
+  background-color: #4caf50;
 }
 
 .wrong {
-  background-color: #f44336 !important;
   box-shadow: 0px 4px #f44336 !important;
-  color: white;
+  color: #f44336;
+}
+
+.wrong .optionLabel {
+  background-color: #f44336;
 }
