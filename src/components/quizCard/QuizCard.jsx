@@ -29,7 +29,7 @@ const QuizCard = ({ quiz, onNext }) => {
       }
     }, 1000);
 
-    // Cleanup ved unmount / nyt spørgsmål
+    // clear timer ved nyt spørgsmål
     return () => clearInterval(interval);
   }, [selectedOption, onNext]);
 

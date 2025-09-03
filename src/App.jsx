@@ -11,7 +11,7 @@ function App() {
   const routes = useRoutes([
     { path: "/", element: <Home /> },
     {
-      path: "/quiz",
+      path: `/quiz/:id`,
       element: (
         <ProtectedRoute requireUser>
           <Quiz />

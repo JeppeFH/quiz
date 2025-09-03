@@ -7,17 +7,30 @@ const Quiz = () => {
   const { quiz, isLoading, error } = useFetchQuiz();
   const [username, setUsername] = useState("");
   const [userId, setUserId] = useState(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
+
+  /* Når quiz loader første gang, tjek localStorage efter "currentIndex" */
+  /* Hvis storedIndex findes så brug tallet, ellers start fra 0 */
+  const [currentIndex, setCurrentIndex] = useState(() => {
+    const storedIndex = localStorage.getItem("currentIndex");
+    return storedIndex ? parseInt(storedIndex, 10) : 0; // parseInt ændrer localstorage-værdi fra string til number
+  });
 
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
     const storedUsername = localStorage.getItem("username");
+    const storedIndex = localStorage.getItem("currentIndex");
 
     if (storedUserId && storedUsername) {
       setUserId(storedUserId);
       setUsername(storedUsername);
+      setCurrentIndex(storedIndex ? parseInt(storedIndex, 10) : 0);
     }
   }, []);
+
+  /* UseEffect der gør at brugeren gemmer sine fremskridt bruges til RememberMe.jsx */
+  useEffect(() => {
+    localStorage.setItem("currentIndex", currentIndex);
+  }, [currentIndex]);
 
   if (isLoading) return <p>Indlæser quiz...</p>;
   if (error) return <p>{error}</p>;
@@ -38,8 +51,7 @@ const Quiz = () => {
             if (currentIndex + 1 < quiz.length) {
               setCurrentIndex(currentIndex + 1);
             } else {
-              // Når vi er færdige med sidste spørgsmål, sæt currentIndex = quiz.length
-              setCurrentIndex(quiz.length);
+              setCurrentIndex(quiz.length); // Når man er færdig med sidste spørgsmål, sæt currentIndex = quiz.length
             }
           }}
         />

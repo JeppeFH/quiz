@@ -28,8 +28,9 @@ const CreateUser = () => {
 
     localStorage.setItem("userId", user._id);
     localStorage.setItem("username", user.name);
+    localStorage.setItem("currentIndex", 0); // nulstiller fremskridt ved ny user
 
-    navigate("/quiz/");
+    navigate(`/quiz/${user._id}`);
   };
 
   return (
