@@ -57,8 +57,8 @@ const Quiz = () => {
         />
       ) : (
         <div className={styles.finishedQuiz}>
-          <p>Quiz færdig.</p>
-          <p>Gå til fløjen ved foto-uddannelsen for at finde næste quiz.</p>
+          <p>Tak for at deltage i Quiz.</p>
+          <p>Gå til fløjen ved foto-uddannelsen for at fortsætte quizzen.</p>
         </div>
       )}
     </section>
