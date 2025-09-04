@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./quizCard.module.css";
+import axios from "axios";
 
 const QuizCard = ({ quiz, onNext }) => {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -7,9 +8,22 @@ const QuizCard = ({ quiz, onNext }) => {
   const [counter, setCounter] = useState(8);
 
   // Håndterer svar
-  const handleAnswer = (optionId) => {
+  const handleAnswer = async (optionId) => {
     setSelectedOption(optionId);
     setIsCorrect(optionId === quiz.correctOptionId);
+
+    try {
+      const userId = localStorage.getItem("userId");
+
+      /* Client sender svar */
+      await axios.post(`http://localhost:3000/quiz/${quiz._id}/answer`),
+        {
+          optionId,
+          userId,
+        };
+    } catch (error) {
+      console.log("Kunne ikke gemme svar", error);
+    }
   };
 
   // Timer + automatisk næste spørgsmål
@@ -52,7 +66,6 @@ const QuizCard = ({ quiz, onNext }) => {
       ) : (
         <h2>{quiz.question}</h2>
       )}
-
       {quiz.options.map((option, index) => {
         const isSelected = selectedOption === option._id;
         const isRightAnswer = option._id === quiz.correctOptionId;

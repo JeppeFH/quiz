@@ -1,5 +1,6 @@
 import styles from "./quiz.module.css";
 import QuizCard from "../../components/quizCard/QuizCard";
+import Statistics from "../../components/statistics/Statistics";
 import { useFetchQuiz } from "../../hooks/useFetchQuiz";
 import { useEffect, useState } from "react";
 
@@ -12,7 +13,7 @@ const Quiz = () => {
   /* Hvis storedIndex findes så brug tallet, ellers start fra 0 */
   const [currentIndex, setCurrentIndex] = useState(() => {
     const storedIndex = localStorage.getItem("currentIndex");
-    return storedIndex ? parseInt(storedIndex, 10) : 0; // parseInt ændrer localstorage-værdi fra string til number
+    return storedIndex ? parseInt(storedIndex, 10) : 0;
   });
 
   useEffect(() => {
@@ -58,7 +59,9 @@ const Quiz = () => {
       ) : (
         <div className={styles.finishedQuiz}>
           <p>Tak for at deltage i Quiz.</p>
-          <p>Gå til fløjen ved foto-uddannelsen for at fortsætte quizzen.</p>
+          <p>Gå til {quiz.hint} for at fortsætte quizzen.</p>
+
+          <Statistics />
         </div>
       )}
     </section>
