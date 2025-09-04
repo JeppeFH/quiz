@@ -39,10 +39,14 @@ const Quiz = () => {
 
   return (
     <section className={styles.quiz}>
-      <h1>
-        Velkommen til <br /> Medieskolernes Quiz
-      </h1>
-      <label className={styles.usernameLabel}>{username}</label>
+      {currentIndex < 2 && (
+        <>
+          <h1>
+            Velkommen til <br /> Medieskolernes Quiz
+          </h1>
+          <label className={styles.usernameLabel}>{username}</label>
+        </>
+      )}
 
       {currentIndex < quiz.length ? (
         <QuizCard
@@ -58,7 +62,10 @@ const Quiz = () => {
         />
       ) : (
         <div className={styles.finishedQuiz}>
-          <p>Tak for at deltage i Quiz {username}.</p>
+          <p>
+            Tak for at deltage i Quiz
+            <label className={styles.username}> {username}</label>.
+          </p>
           <p>Gå til {quiz.hint} for at fortsætte quizzen.</p>
 
           <Statistics />

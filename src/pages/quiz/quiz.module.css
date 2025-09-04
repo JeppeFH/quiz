@@ -9,6 +9,11 @@
   color: #e98b44;
 }
 
+.username {
+  color: #e98b44;
+  font-size: 17px;
+}
+
 .finishedQuiz p {
   color: white;
 }
