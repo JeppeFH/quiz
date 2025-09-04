@@ -66,7 +66,7 @@ const Quiz = () => {
             Tak for at deltage i Quiz
             <label className={styles.username}> {username}</label>.
           </p>
-          <p>Gå til {quiz.hint} for at fortsætte quizzen.</p>
+          <p>Gå til {quiz[quiz.length - 1].hint} for at fortsætte Quizzen.</p>
 
           <Statistics />
         </div>
