@@ -58,7 +58,7 @@ const Quiz = () => {
         />
       ) : (
         <div className={styles.finishedQuiz}>
-          <p>Tak for at deltage i Quiz.</p>
+          <p>Tak for at deltage i Quiz {username}.</p>
           <p>Gå til {quiz.hint} for at fortsætte quizzen.</p>
 
           <Statistics />
