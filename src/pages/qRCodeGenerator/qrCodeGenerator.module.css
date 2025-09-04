@@ -1,7 +1,13 @@
-.QRCode {
+.qRCode {
+  background-color: white !important;
+  padding-top: 50px;
   text-align: center;
-  margin: 50px auto;
   padding: 20px;
-  border: 1px solid black;
-  width: 200px;
+  width: 100%;
+  height: 100vh;
+}
+
+.qRCode h1 {
+  color: black;
+  margin-bottom: 30px;
 }

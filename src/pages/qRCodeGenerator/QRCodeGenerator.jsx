@@ -5,9 +5,9 @@ const QRCodeGenerator = () => {
   const url = "http://localhost:5173/";
 
   return (
-    <div className={styles.QRCode}>
-      <h3>Scan QR for at starte quiz</h3>
-      <QRCodeCanvas value={url} size={150} />
+    <div className={styles.qRCode}>
+      <h1>Scan QR for at starte quiz</h1>
+      <QRCodeCanvas value={url} size={300} />
       <p>{url}</p>
     </div>
   );
