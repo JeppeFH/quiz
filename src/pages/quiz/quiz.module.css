@@ -8,3 +8,11 @@
   margin-bottom: 30px;
   color: #e98b44;
 }
+
+.finishedQuiz p {
+  color: white;
+}
+
+.finishedQuiz p:first-child {
+  margin: 30px 0 10px 0;
+}

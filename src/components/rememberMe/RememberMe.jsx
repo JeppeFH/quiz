@@ -33,7 +33,7 @@ const RememberMe = () => {
     <>
       <button className={styles.rememberMeBtn} onClick={handleContinue}>
         Spil videre som {username}
-        {currentIndex > 0 && `(Spg. ${currentIndex + 1})`}
+        {/* {currentIndex > 0 && `(Spg. ${currentIndex + 1})`} */}
       </button>
     </>
   );
