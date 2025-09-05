@@ -1,5 +1,6 @@
 // ProtectedRoute.jsx
-import { Navigate, useParams } from "react-router-dom";
+
+/* import { Navigate, useParams } from "react-router-dom";
 import { useFetchUser } from "../../hooks/useFetchUser";
 
 const ProtectedRoute = ({ children, requireUser = false }) => {
@@ -24,4 +25,4 @@ const ProtectedRoute = ({ children, requireUser = false }) => {
   return children;
 };
 
-export default ProtectedRoute;
+export default ProtectedRoute; */

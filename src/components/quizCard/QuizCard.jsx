@@ -5,7 +5,7 @@ import axios from "axios";
 const QuizCard = ({ quiz, onNext }) => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [isCorrect, setIsCorrect] = useState(null);
-  const [counter, setCounter] = useState(8);
+  const [counter, setCounter] = useState(5);
 
   // Håndterer svar
   const handleAnswer = async (optionId) => {
@@ -29,7 +29,7 @@ const QuizCard = ({ quiz, onNext }) => {
   useEffect(() => {
     if (!selectedOption) return;
 
-    let timeLeft = 8;
+    let timeLeft = 5;
     setCounter(timeLeft);
 
     const interval = setInterval(() => {
@@ -50,7 +50,7 @@ const QuizCard = ({ quiz, onNext }) => {
   useEffect(() => {
     setSelectedOption(null);
     setIsCorrect(null);
-    setCounter(8);
+    setCounter(5);
   }, [quiz]);
 
   return (

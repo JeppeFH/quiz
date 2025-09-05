@@ -1,8 +1,8 @@
 import { useRoutes } from "react-router-dom";
 
 /* Import Components */
-import ProtectedRoute from "./components/protectedRoute/ProtectedRoute";
-
+/* import ProtectedRoute from "./components/protectedRoute/ProtectedRoute";
+ */
 /* Import Pages */
 import Home from "./pages/home/Home";
 import Quiz from "./pages/quiz/Quiz";
@@ -13,12 +13,8 @@ function App() {
     { path: "/", element: <Home /> },
     { path: "/qrcode", element: <QRCodeGenerator /> },
     {
-      path: `/quiz/:id`,
-      element: (
-        <ProtectedRoute requireUser>
-          <Quiz />
-        </ProtectedRoute>
-      ),
+      path: `/quiz`,
+      element: <Quiz />,
     },
   ]);
 
