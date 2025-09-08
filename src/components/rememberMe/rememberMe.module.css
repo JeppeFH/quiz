@@ -26,3 +26,10 @@
 .rememberMeBtn:hover {
   background-color: rgb(245, 245, 245);
 }
+
+@media screen and (min-width: 700px) {
+  .rememberMeBtn {
+    width: 500px;
+    align-self: center;
+  }
+}
