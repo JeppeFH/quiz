@@ -9,7 +9,9 @@ export const useFetchUser = () => {
     setUserIsLoading(true);
 
     try {
-      const response = await fetch("http://localhost:3000/user");
+      const response = await fetch(
+        "https://quiz-tpjgk.ondigitalocean.app/users"
+      );
       const data = await response.json();
       setUser(data.data);
       return data.data;
@@ -24,11 +26,14 @@ export const useFetchUser = () => {
   const createUser = async (name) => {
     setUserIsLoading(true);
     try {
-      const response = await fetch("http://localhost:3000/user", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name }),
-      });
+      const response = await fetch(
+        "https://quiz-tpjgk.ondigitalocean.app/user",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name }),
+        }
+      );
 
       const result = await response.json();
 
@@ -49,7 +54,9 @@ export const useFetchUser = () => {
     setUserIsLoading(true);
 
     try {
-      const response = await fetch(`http://localhost:3000/user/${id}`);
+      const response = await fetch(
+        `https://quiz-tpjgk.ondigitalocean.app/user/${id}`
+      );
       const data = await response.json();
       return data.data;
     } catch (userError) {

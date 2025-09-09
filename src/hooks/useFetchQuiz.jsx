@@ -9,8 +9,11 @@ export const useFetchQuiz = () => {
     setQuizIsLoading(true);
 
     try {
-      const response = await fetch("http://localhost:3000/quiz");
+      const response = await fetch(
+        "https://quiz-tpjgk.ondigitalocean.app/quiz"
+      );
       const data = await response.json();
+      console.log("Fetch all quizzes", data);
       setQuiz(data.data);
       return data.data;
     } catch (quizError) {
@@ -25,8 +28,11 @@ export const useFetchQuiz = () => {
     setQuizIsLoading(true);
 
     try {
-      const response = await fetch(`http://localhost:3000/quiz/${id}`);
+      const response = await fetch(
+        `https://quiz-tpjgk.ondigitalocean.app/quiz/${id}`
+      );
       const data = await response.json();
+      console.log("Fetch quiz by id", data);
       return data.data;
     } catch (quizError) {
       setQuizError("Der skete en fejl");

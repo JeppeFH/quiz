@@ -16,10 +16,13 @@ const QuizCard = ({ quiz, onNext }) => {
       const userId = localStorage.getItem("userId");
 
       /* Client sender svar */
-      await axios.post(`http://localhost:3000/quiz/${quiz._id}/answer`, {
-        optionId,
-        userId,
-      });
+      await axios.post(
+        `https://quiz-tpjgk.ondigitalocean.app/quiz/${quiz._id}/answer`,
+        {
+          optionId,
+          userId,
+        }
+      );
     } catch (error) {
       console.log("Kunne ikke gemme svar", error);
     }

@@ -9,7 +9,9 @@ const Statistics = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/quiz");
+        const response = await axios.get(
+          "https://quiz-tpjgk.ondigitalocean.app/quiz/"
+        );
         setQuizzes(response.data.data);
       } catch (error) {
         console.log("Kunne ikke hente quiz data", error);
