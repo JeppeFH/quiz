@@ -4,38 +4,41 @@ import { jwtDecode } from "jwt-decode";
 import { useLocalStorage } from "@uidotdev/usehooks";
 
 export const useFetchAuth = () => {
-  const [auth, setAuth] = useLocalStorage("auth", {}); // hook gemmer og henter data fra localStorage, så det "overlever" side-genindlæsning.
-  const [username, setUsername] = useState("");
+  const [auth, setAuth] = useLocalStorage("auth", {});
   const [token, setToken] = useState(auth.token || null);
-  const [signedIn, setSignedIn] = useState(!!auth.token); // Hvis der er en token i localStorage (auth.token findes), så: setSignedIn(true) hvis ikke (false)
-  const [user, setUser] = useState(auth.token ? jwtDecode(auth.token) : null); // måden systemet "husker" ens bruger, efter en sideopdatering
+  const [signedIn, setSignedIn] = useState(!!auth.token);
+  const [user, setUser] = useState(auth.token ? jwtDecode(auth.token) : null);
   const [error, setError] = useState(null);
 
-  /* SignIn funktion der sender username til serveren for at få et token. */
-  const signIn = async () => {
+  const signIn = async (name) => {
     setError(null);
 
     try {
       const response = await axios.post(
         "https://quiz-tpjgk.ondigitalocean.app/signin",
-        { username }
+        { name }
       );
 
-      const receivedToken = response.data.data.token; // Henter token ud af response fra serveren
-      const decoded = jwtDecode(receivedToken); // Bruger jwt-decode-biblioteket til at dekode token’en, så man kan se info om brugeren.
+      const receivedToken = response.data.data.token;
+      const decoded = jwtDecode(receivedToken);
 
-      setToken(receivedToken); // Gemmer token i lokal state
-      setUser(decoded); // Gemmer de dekodede brugeroplysninger i user.
+      setToken(receivedToken);
+      setUser(decoded);
       setSignedIn(true);
-      setAuth({ token: receivedToken }); // Gemmer token’en i localStorage, så brugeren forbliver inde, selv hvis siden genindlæses.
+
+      setAuth({ token: receivedToken });
+      localStorage.setItem("token", receivedToken);
+
+      return true;
     } catch (error) {
       setError("Login mislykkedes");
       setSignedIn(false);
       setToken(null);
       setUser(null);
       setAuth({});
+      return false;
     }
   };
 
-  return { username, setUsername, token, signedIn, user, error, signIn };
+  return { token, signedIn, user, error, signIn };
 };

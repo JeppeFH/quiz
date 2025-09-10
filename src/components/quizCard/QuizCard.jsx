@@ -7,28 +7,27 @@ const QuizCard = ({ quiz, onNext }) => {
   const [isCorrect, setIsCorrect] = useState(null);
   const [counter, setCounter] = useState(5);
 
-  // Håndterer svar
+  /* Håndterer svar */
   const handleAnswer = async (optionId) => {
     setSelectedOption(optionId);
     setIsCorrect(optionId === quiz.correctOptionId);
 
     try {
       const userId = localStorage.getItem("userId");
+      const token = localStorage.getItem("token");
 
       /* Client sender svar */
       await axios.post(
         `https://quiz-tpjgk.ondigitalocean.app/quiz/${quiz._id}/answer`,
-        {
-          optionId,
-          userId,
-        }
+        { optionId, userId },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
     } catch (error) {
       console.log("Kunne ikke gemme svar", error);
     }
   };
 
-  // Timer + automatisk næste spørgsmål
+  /* Timer og næste spg. */
   useEffect(() => {
     if (!selectedOption) return;
 
@@ -45,11 +44,11 @@ const QuizCard = ({ quiz, onNext }) => {
       }
     }, 1000);
 
-    // clear timer ved nyt spørgsmål
+    /* nulstiller timer ved nyt spørgsmål */
     return () => clearInterval(interval);
   }, [selectedOption, onNext]);
 
-  // Nulstil state ved nyt spørgsmål
+  /* Nulstiller state ved nyt spørgsmål */
   useEffect(() => {
     setSelectedOption(null);
     setIsCorrect(null);
