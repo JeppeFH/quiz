@@ -56,7 +56,7 @@ const Quiz = () => {
             if (currentIndex + 1 < quiz.length) {
               setCurrentIndex(currentIndex + 1);
             } else {
-              setCurrentIndex(quiz.length); // Når man er færdig med sidste spørgsmål, sæt currentIndex = quiz.length
+              setCurrentIndex(quiz.length);
             }
           }}
         />
